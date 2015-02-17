@@ -6,7 +6,7 @@ def readme():
 
 setup(
     name='piptree',
-    version='0.1.2',
+    version='0.1.3',
     description='List your ',
     long_description=readme(),
     classifiers=[

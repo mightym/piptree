@@ -1,4 +1,6 @@
 #!/usr/bin/env python
 
 import piptree
-piptree.show()
+import sys
+requirementsfile = sys.argv[1]
+piptree.show(requirementsfile)

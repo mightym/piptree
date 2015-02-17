@@ -1,10 +1,8 @@
 # coding:utf-8
 import pkg_resources
-import sys
 
 installed_packages = dict(
             [(p.project_name.lower(), p) for p in pkg_resources.working_set])
-
 
 class bcolors:
     HEADER = '\033[95m'
@@ -46,33 +44,8 @@ def showPackageTree(lines):
             totalDependecies += getRequirements(normalized_name)
             allrequirements += [normalized_name]
 
-            #package = {
-                #'requires': getRequirements(normalized_name),
-                # 'name': dist.project_name,
-                # 'version': dist.version,
-                # 'location': dist.location,
-            #}
-            # print package['name']
-            # print package['requires']
-            # normalized_name + ' requires:'
-            #if getRequirements(normalized_name):
-                #print 'Requirements for ' + normalized_name
-                #process_tree(getRequirements(normalized_name), process)
-                #print '└ '+ str(getRequirements(normalized_name))
-
-                #for requirement in getRequirements(normalized_name):
-                    #print '  └ '+ str(getRequirements(requirement.lower()))
-            #else:
-                #print '-'
-            #print '--------------'
-
-
-    #print allrequirements
-    #print list(set(totalDependecies))
     sortedrequirements = sorted(allrequirements)
-    #print str(sortedrequirements) + '(' + str(len(sortedrequirements)) + ')'
-    #print ''
-    #print ''
+
     for r in sortedrequirements:
         if getRequirements(r.lower()):
             print bcolors.OKBLUE + installed_packages[r].project_name + ' ' + installed_packages[r].version + bcolors.ENDC
@@ -80,8 +53,6 @@ def showPackageTree(lines):
         else:
             print bcolors.OKBLUE + installed_packages[r].project_name + ' ' + installed_packages[r].version + bcolors.ENDC
 
-
-def show():
-    requirementsfile = sys.argv[1]
+def show(requirementsfile):
     with open(requirementsfile) as f:
         showPackageTree(f.readlines())
