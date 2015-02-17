@@ -1,7 +1,15 @@
 Piptree
 --------
 
-To use (with caution), simply do::
+Installation
+============
 
-    >>> import piptree
-    >>> piptree.show()
+    pip install piptree
+
+
+Usage
+=====
+
+To get a tree of your local requirements and dependecies use simply do::
+
+`$ piptree requirements.txt`
