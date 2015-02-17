@@ -1,5 +1,6 @@
 # coding:utf-8
 import pkg_resources
+import sys
 
 installed_packages = dict(
             [(p.project_name.lower(), p) for p in pkg_resources.working_set])
@@ -81,5 +82,6 @@ def showPackageTree(lines):
 
 
 def show():
-    with open('requirements.txt') as f:
+    requirementsfile = sys.argv[1]
+    with open(requirementsfile) as f:
         showPackageTree(f.readlines())
