@@ -2,27 +2,32 @@
 import pkg_resources
 
 installed_packages = dict(
-            [(p.project_name.lower(), p) for p in pkg_resources.working_set])
+    [(p.project_name.lower(), p) for p in pkg_resources.working_set]
+)
+
 
 class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+
 
 def process(value, depth):
     if depth == 0:
-        print '└── ' + value
+        print("└── " + value)
     else:
-        print (depth + 3) * ' ' + '└── ' + value
+        print((depth + 3) * " " + "└── " + value)
+
 
 def getRequirements(package):
     dist = installed_packages[package]
     return list(dep.project_name for dep in dist.requires())
+
 
 def process_tree(reqlist, callback, depth):
     for k in reqlist:
@@ -38,7 +43,7 @@ def showPackageTree(lines):
     allrequirements = []
 
     for line in lines:
-        normalized_name = line.split('==', 1)[0].strip().lower()
+        normalized_name = line.split("==", 1)[0].strip().lower()
         if normalized_name in installed_packages:
 
             totalDependecies += getRequirements(normalized_name)
@@ -48,10 +53,23 @@ def showPackageTree(lines):
 
     for r in sortedrequirements:
         if getRequirements(r.lower()):
-            print bcolors.OKBLUE + installed_packages[r].project_name + ' ' + installed_packages[r].version + bcolors.ENDC
+            print(
+                bcolors.OKBLUE
+                + installed_packages[r].project_name
+                + " "
+                + installed_packages[r].version
+                + bcolors.ENDC
+            )
             process_tree(getRequirements(r.lower()), process, 0)
         else:
-            print bcolors.OKBLUE + installed_packages[r].project_name + ' ' + installed_packages[r].version + bcolors.ENDC
+            print(
+                bcolors.OKBLUE
+                + installed_packages[r].project_name
+                + " "
+                + installed_packages[r].version
+                + bcolors.ENDC
+            )
+
 
 def show(requirementsfile):
     with open(requirementsfile) as f:
