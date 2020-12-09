@@ -1,30 +1,30 @@
 from setuptools import setup
 
-def readme():
-    with open('README.rst') as f:
-        return f.read()
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setup(
-    name='piptree',
-    version='0.1.3a',
-    description='List your ',
-    long_description=readme(),
+    name="piptree",
+    version="0.1.4",
+    description="Get a dependency tree for your local requirements.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Text Processing :: Linguistic',
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
     ],
-    keywords='pip requirements tree',
-    url='http://github.com/mightym/piptree',
-    author='Mark Wirblich',
-    author_email='mark@wirblich.com',
-    license='MIT',
-    packages=['piptree'],
+    keywords="pip requirements tree",
+    url="http://github.com/mightym/piptree",
+    author="Mark Wirblich",
+    author_email="mark@wirblich.com",
+    license="MIT",
+    packages=["piptree"],
     install_requires=[
-        'pip',
+        "pip",
     ],
     include_package_data=True,
     zip_safe=False,
-    scripts=['bin/piptree'],
-    )
+    scripts=["bin/piptree"],
+)
